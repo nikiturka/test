@@ -1,13 +1,21 @@
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from .models import Thread, Message
 from .serializers import ThreadSerializer, MessageSerializer
 
 
+class Pagination(PageNumberPagination):
+    page_size = 5
+    max_page_size = 1000
+    page_size_query_param = 'page-size'
+
+
 class ThreadListCreateAPIView(generics.ListCreateAPIView):  # Create (Task 1) and List of threads for each user (Task 3)
     serializer_class = ThreadSerializer
     model = Thread
+    pagination_class = Pagination
 
     def get_queryset(self):
         user = self.request.user.id
