@@ -21,6 +21,12 @@ class ThreadListCreateAPIView(generics.ListCreateAPIView):  # Create (Task 1) an
         user = self.request.user.id
         return Thread.objects.filter(participants=user)
 
+    def post(self, request, *args, **kwargs):
+        participants = self.request.data.get("participants", [])
+        if len(participants) > 2:
+            return Response("Too many users for one thread")
+        return self.create(request, *args, **kwargs)
+
 
 class ThreadDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Thread.objects.all()
