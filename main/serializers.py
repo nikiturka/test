@@ -9,6 +9,3 @@ class ThreadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Thread
         fields = ('id', 'participants')
-
-
-

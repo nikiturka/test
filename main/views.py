@@ -4,7 +4,7 @@ from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 
 from .models import Thread, Message
-from .serializers import ThreadSerializer, MessageSerializer
+from .serializers import ThreadSerializer
 
 
 class ThreadListCreateAPIView(generics.ListCreateAPIView):  # Create (Task 1) and List of threads for each user (Task 3)
@@ -17,6 +17,9 @@ class ThreadListCreateAPIView(generics.ListCreateAPIView):  # Create (Task 1) an
         return Thread.objects.filter(participants=user)
 
 
+class ThreadDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Thread.objects.all()
+    serializer_class = ThreadSerializer
 
 
 

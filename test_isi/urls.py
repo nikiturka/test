@@ -6,4 +6,5 @@ from main.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/threadlist/', ThreadListCreateAPIView.as_view()),
+    path('api/v1/threadlist/<int:pk>/', ThreadDetailAPIView.as_view()),
 ]
