@@ -2,9 +2,8 @@ from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
-
 from .models import Thread, Message
-from .serializers import ThreadSerializer
+from .serializers import ThreadSerializer, MessageSerializer
 
 
 class ThreadListCreateAPIView(generics.ListCreateAPIView):  # Create (Task 1) and List of threads for each user (Task 3)
