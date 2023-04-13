@@ -46,7 +46,7 @@ class MessageReadAPIView(generics.RetrieveAPIView):
 
 
 class MessageCountAPIView(generics.ListAPIView):
-    queryset = Message.objects.filter(is_read=True)
+    queryset = Message.objects.filter(is_read=False)
     serializer_class = MessageSerializer
 
     def list(self, request, *args, **kwargs):
