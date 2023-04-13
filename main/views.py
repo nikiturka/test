@@ -33,3 +33,14 @@ def message_detail(request, pk):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
+class MessageReadAPIView(generics.RetrieveAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.is_read = True
+        instance.save()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)

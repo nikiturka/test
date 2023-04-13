@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/v1/threadlist/', ThreadListCreateAPIView.as_view()),
     path('api/v1/threadlist/<int:pk>/', ThreadDetailAPIView.as_view()),
     path('api/v1/threadlist/<int:pk>/detail/', message_detail),
+    path('api/v1/messagelist/<int:pk>/', MessageReadAPIView.as_view()),
 ]
