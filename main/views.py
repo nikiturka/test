@@ -1,6 +1,5 @@
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
-from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 from .models import Thread, Message
 from .serializers import ThreadSerializer, MessageSerializer
@@ -44,3 +43,13 @@ class MessageReadAPIView(generics.RetrieveAPIView):
         instance.save()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+
+class MessageCountAPIView(generics.ListAPIView):
+    queryset = Message.objects.filter(is_read=True)
+    serializer_class = MessageSerializer
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        count = queryset.count()
+        return Response({'Unread messages': count})
