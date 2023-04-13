@@ -11,7 +11,6 @@ class ThreadListCreateAPIView(generics.ListCreateAPIView):  # Create (Task 1) an
 
     def get_queryset(self):
         user = self.request.user.id
-        print(user)
         return Thread.objects.filter(participants=user)
 
 
@@ -46,8 +45,11 @@ class MessageReadAPIView(generics.RetrieveAPIView):
 
 
 class MessageCountAPIView(generics.ListAPIView):
-    queryset = Message.objects.filter(is_read=False)
     serializer_class = MessageSerializer
+
+    def get_queryset(self):
+        user_id = self.request.user.id
+        return Message.objects.filter(thread__participants=user_id, is_read=False)
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
