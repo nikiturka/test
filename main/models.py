@@ -9,10 +9,10 @@ class Thread(models.Model):
 
 
 class Message(models.Model):
-    # saving all the messages from users that do not exist
-    sender = models.ForeignKey(User, on_delete=models.PROTECT)
+    # deleting all the messages from users that do not exist
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField(max_length=400)
-    thread = models.ForeignKey(Thread, on_delete=models.PROTECT)  # saving thread with user that do not exist
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE)  # deleting thread with user that do not exist
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     is_read = models.BooleanField(default=False)
 
